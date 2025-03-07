@@ -18,10 +18,16 @@ spec:
   template:
     metadata:
       labels:
-        app: nginx       # This label is used to match pods with the service.
+        app: nginx       # This label is used to match pods with the Service.
     spec:
       containers:
         - name: nginx
-          image: nginx:latest  # Start with the latest version of nginx.
+          image: nginx:latest  # Starting with the latest version.
           ports:
             - containerPort: 80
+          readinessProbe:             # Added readiness probe
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
