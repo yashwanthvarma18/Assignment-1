@@ -9,23 +9,23 @@ spec:
     canary:
       steps:
         - setWeight: 20      # Update 20% of pods initially.
-        - pause: {duration: 10s}  # Pause to monitor the new version.
+        - pause: {duration: 5s}  # Pause to monitor the new version.
         - setWeight: 50      # Update 50% of pods next.
-        - pause: {duration: 20s}  # Pause again for observation.
+        - pause: {duration: 10s}  # Pause again for observation.
   selector:
     matchLabels:
       app: nginx
   template:
     metadata:
       labels:
-        app: nginx       # This label is used to match pods with the Service.
+        app: nginx       # Must match selector in Service.
     spec:
       containers:
         - name: nginx
-          image: nginx:latest  # Starting with the latest version.
+          image: nginx:latest  # Change to e.g., nginx:1.19 to simulate version update.
           ports:
             - containerPort: 80
-          readinessProbe:             # Added readiness probe
+          readinessProbe:
             httpGet:
               path: /
               port: 80

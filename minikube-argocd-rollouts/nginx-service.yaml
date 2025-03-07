@@ -6,8 +6,8 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: nginx      # Targets pods with this label.
+    app: nginx      # Targets pods with the app: nginx label.
   ports:
     - protocol: TCP
-      port: 80      # External port for accessing the service.
-      targetPort: 80  # Internal container port.
+      port: 80      # External port.
+      targetPort: 80  # Container port.
