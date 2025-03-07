@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  namespace: default
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx      # Selects pods with this label.
+  ports:
+    - protocol: TCP
+      port: 80      # Exposes port 80.
+      targetPort: 80  # Forwards traffic to container's port 80.

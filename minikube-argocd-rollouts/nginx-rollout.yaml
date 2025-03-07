@@ -8,20 +8,20 @@ spec:
   strategy:
     canary:
       steps:
-        - setWeight: 20
-        - pause: {duration: 10s}
-        - setWeight: 50
-        - pause: {duration: 20s}
+        - setWeight: 20      # Update 20% of pods initially.
+        - pause: {duration: 10s}  # Pause to monitor the new version.
+        - setWeight: 50      # Update 50% of pods next.
+        - pause: {duration: 20s}  # Pause again for observation.
   selector:
     matchLabels:
       app: nginx
   template:
     metadata:
       labels:
-        app: nginx
+        app: nginx       # This label is used to match pods with the service.
     spec:
       containers:
         - name: nginx
-          image: nginx:latest
+          image: nginx:latest  # Start with the latest version of nginx.
           ports:
             - containerPort: 80
